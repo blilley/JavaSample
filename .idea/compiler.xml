@@ -24,13 +24,11 @@
         <processorPath useClasspath="true" />
         <module name="core" />
         <module name="mysql" />
-        <module name="webapp" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="core" target="1.5" />
-      <module name="mysql" target="1.5" />
-      <module name="webapp" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="core" target="1.8" />
+      <module name="mysql" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

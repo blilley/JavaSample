@@ -1,6 +1,6 @@
-package net.gartee.openperiodical.entities;
+package net.gartee.openperiodical.core.entities;
 
-import net.gartee.openperiodical.identities.PeriodicalId;
+import net.gartee.openperiodical.core.identities.PeriodicalId;
 
 public class Newspaper extends Periodical {
     public Newspaper(PeriodicalId id) {

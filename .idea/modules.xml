@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/modules/core/core.iml" filepath="$PROJECT_DIR$/modules/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/mysql/mysql.iml" filepath="$PROJECT_DIR$/modules/mysql/mysql.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/webapp/webapp.iml" filepath="$PROJECT_DIR$/modules/webapp/webapp.iml" />
     </modules>
   </component>
 </project>
