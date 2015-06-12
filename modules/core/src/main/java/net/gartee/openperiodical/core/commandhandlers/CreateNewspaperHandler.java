@@ -4,7 +4,7 @@ import net.gartee.cqrs.CommandHandler;
 import net.gartee.openperiodical.core.commands.CreateNewspaper;
 import net.gartee.openperiodical.core.dataaccess.NewspaperRepository;
 import net.gartee.openperiodical.core.entities.Newspaper;
-import net.gartee.openperiodical.core.exceptions.PeriodicalAlreadyExistsException;
+import net.gartee.openperiodical.core.exceptions.EntityAlreadyExistsException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 
 public class CreateNewspaperHandler implements CommandHandler<CreateNewspaper> {
@@ -40,7 +40,7 @@ public class CreateNewspaperHandler implements CommandHandler<CreateNewspaper> {
 
         private static void thatNewspaperDoesNotExist(Newspaper newspaper, NewspaperRepository newspaperRepository) {
             if(newspaperRepository.exists(newspaper.getId())) {
-                throw new PeriodicalAlreadyExistsException(newspaper.getId());
+                throw new EntityAlreadyExistsException(newspaper.getId());
             }
         }
     }

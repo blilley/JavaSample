@@ -15,3 +15,6 @@ http://search.maven.org/#artifactdetails%7Cmysql%7Cmysql-connector-java%7C5.1.35
 
 ###Sample Code
 http://stackoverflow.com/questions/11855627/how-to-retrieve-result-set-of-a-query-from-mysql-in-java
+
+###Sample Code
+http://www.journaldev.com/2882/hibernate-tutorial-for-beginners-using-xml-annotations-and-property-configurations

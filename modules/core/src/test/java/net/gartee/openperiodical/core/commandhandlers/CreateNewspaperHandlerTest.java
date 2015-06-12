@@ -3,7 +3,7 @@ package net.gartee.openperiodical.core.commandhandlers;
 import net.gartee.openperiodical.core.commands.CreateNewspaper;
 import net.gartee.openperiodical.core.dataaccess.NewspaperRepository;
 import net.gartee.openperiodical.core.entities.Newspaper;
-import net.gartee.openperiodical.core.exceptions.PeriodicalAlreadyExistsException;
+import net.gartee.openperiodical.core.exceptions.EntityAlreadyExistsException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -50,7 +50,7 @@ public class CreateNewspaperHandlerTest {
         handler.handle(command);
     }
 
-    @Test(expected = PeriodicalAlreadyExistsException.class)
+    @Test(expected = EntityAlreadyExistsException.class)
     public void handle_WithExistingNewspaper_ThrowsException() {
         NewspaperRepository repository = mock(NewspaperRepository.class);
         when(repository.exists(anyObject())).thenReturn(true);

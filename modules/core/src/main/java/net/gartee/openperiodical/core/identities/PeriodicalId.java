@@ -1,14 +1,14 @@
 package net.gartee.openperiodical.core.identities;
 
 public class PeriodicalId {
-    private int id;
+    private int value;
 
-    public PeriodicalId(int id) {
-        this.id = id;
+    public PeriodicalId(int value) {
+        this.value = value;
     }
 
-    public int getId() {
-        return id;
+    public int getValue() {
+        return value;
     }
 
     @Override
@@ -21,11 +21,11 @@ public class PeriodicalId {
 
         PeriodicalId periodicalId = (PeriodicalId) o;
 
-        return getId() == periodicalId.getId();
+        return getValue() == periodicalId.getValue();
     }
 
     @Override
     public String toString() {
-        return String.valueOf(getId());
+        return String.valueOf(getValue());
     }
 }
