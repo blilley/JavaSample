@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE hibernate-configuration PUBLIC
+                "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+<session-factory>
+    <!-- url and credentials -->
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://192.168.56.102/openperiodical</property>
+    <property name="hibernate.connection.username">test</property>
+    <property name="hibernate.connection.password">mysql</property>
+
+    <!-- drop/create tables before tests are run -->
+    <property name="hibernate.hbm2ddl.auto">create-drop</property>
+
+    <!-- Connection Pool Size -->
+    <property name="hibernate.connection.pool_size">1</property>
+
+    <!-- org.hibernate.HibernateException: No CurrentSessionContext configured! -->
+    <property name="hibernate.current_session_context_class">thread</property>
+
+    <!-- Outputs the SQL queries, should be disabled in Production -->
+    <property name="hibernate.show_sql">true</property>
+
+    <!-- Dialect is required to let Hibernate know the Database Type, MySQL, Oracle etc
+        Hibernate 4 automatically figure out Dialect from Database Connection Metadata -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+</session-factory>
+</hibernate-configuration>
