@@ -26,7 +26,7 @@ public class MySqlNewspaperRepositoryTest {
 
     @BeforeClass
     public static void setupDatabase() {
-        
+        SeedDatabase(HibernateUtil.getSessionFactory().getCurrentSession());
     }
 
     @Before
@@ -104,5 +104,14 @@ public class MySqlNewspaperRepositoryTest {
     @AfterClass
     public static void destroyDatabase() {
 
+    }
+
+    private static void SeedDatabase(Session session) {
+        Transaction transaction = session.beginTransaction();
+        NewspaperData newspaper = new NewspaperData();
+        newspaper.setId(EXISTING_NEWSPAPER_ID);
+        newspaper.setName(EXISTING_NEWSPAPER_NAME);
+        session.save(newspaper);
+        transaction.commit();
     }
 }
