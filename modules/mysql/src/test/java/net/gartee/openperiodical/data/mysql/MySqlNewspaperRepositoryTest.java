@@ -101,11 +101,6 @@ public class MySqlNewspaperRepositoryTest {
         transaction.rollback();
     }
 
-    @AfterClass
-    public static void destroyDatabase() {
-
-    }
-
     private static void SeedDatabase(Session session) {
         Transaction transaction = session.beginTransaction();
         NewspaperData newspaper = new NewspaperData();
