@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/modules/core/core.iml" filepath="$PROJECT_DIR$/modules/core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/mysql/mysql.iml" filepath="$PROJECT_DIR$/modules/mysql/mysql.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/web/web.iml" filepath="$PROJECT_DIR$/modules/web/web.iml" />
     </modules>
   </component>

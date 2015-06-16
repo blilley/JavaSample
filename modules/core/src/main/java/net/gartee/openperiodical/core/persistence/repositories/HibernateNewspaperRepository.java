@@ -1,16 +1,15 @@
-package net.gartee.openperiodical.data.mysql;
+package net.gartee.openperiodical.core.persistence.repositories;
 
-import net.gartee.openperiodical.core.dataaccess.NewspaperRepository;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.exceptions.EntityDoesNotExistException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
-import net.gartee.openperiodical.data.entities.NewspaperData;
+import net.gartee.openperiodical.core.persistence.entities.NewspaperData;
 import org.hibernate.Session;
 
-public class MySqlNewspaperRepository implements NewspaperRepository {
+public class HibernateNewspaperRepository implements NewspaperRepository {
     private final Session session;
 
-    public MySqlNewspaperRepository(Session session) {
+    public HibernateNewspaperRepository(Session session) {
         this.session = session;
     }
 

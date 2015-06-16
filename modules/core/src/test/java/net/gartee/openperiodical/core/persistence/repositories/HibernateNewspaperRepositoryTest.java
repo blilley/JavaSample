@@ -1,19 +1,22 @@
-package net.gartee.openperiodical.data.mysql;
+package net.gartee.openperiodical.core.persistence.repositories;
 
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.exceptions.EntityDoesNotExistException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
-import net.gartee.openperiodical.data.entities.NewspaperData;
+import net.gartee.openperiodical.core.persistence.entities.NewspaperData;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class MySqlNewspaperRepositoryTest {
+public class HibernateNewspaperRepositoryTest {
 
     private static final int EXISTING_NEWSPAPER_ID = 1;
     private static final String EXISTING_NEWSPAPER_NAME = "Existing Newspaper";
@@ -37,7 +40,7 @@ public class MySqlNewspaperRepositoryTest {
 
     @Test
     public void get_WithExistingId_ReturnsNewspaper() {
-        MySqlNewspaperRepository repository = new MySqlNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
         PeriodicalId newspaperId = new PeriodicalId(EXISTING_NEWSPAPER_ID);
 
         Newspaper newspaper = repository.get(newspaperId);
@@ -48,7 +51,7 @@ public class MySqlNewspaperRepositoryTest {
 
     @Test(expected = EntityDoesNotExistException.class)
     public void get_WithNonExistentId_ThrowsException() {
-        MySqlNewspaperRepository repository = new MySqlNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
         PeriodicalId newspaperId = new PeriodicalId(NEW_NEWSPAPER_ID);
 
         repository.get(newspaperId);
@@ -56,7 +59,7 @@ public class MySqlNewspaperRepositoryTest {
 
     @Test
     public void exists_WhenIdExists_ReturnsTrue() {
-        MySqlNewspaperRepository repository = new MySqlNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
         PeriodicalId newspaperId = new PeriodicalId(EXISTING_NEWSPAPER_ID);
 
         assertTrue(repository.exists(newspaperId));
@@ -64,7 +67,7 @@ public class MySqlNewspaperRepositoryTest {
 
     @Test
     public void exists_WhenIdDoesNotExist_ReturnsFalse() {
-        MySqlNewspaperRepository repository = new MySqlNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
         PeriodicalId newspaperId = new PeriodicalId(NEW_NEWSPAPER_ID);
 
         assertFalse(repository.exists(newspaperId));
@@ -72,7 +75,7 @@ public class MySqlNewspaperRepositoryTest {
 
     @Test
     public void save_WithExistingNewspaper_UpdatesRecord() {
-        MySqlNewspaperRepository repository = new MySqlNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
         Newspaper newsPaper = new Newspaper(new PeriodicalId(EXISTING_NEWSPAPER_ID));
         newsPaper.setName(UPDATED_NEWSPAPER_NAME);
 
@@ -85,7 +88,7 @@ public class MySqlNewspaperRepositoryTest {
 
     @Test
     public void save_WithNewNewspaper_InsertsRecord() {
-        MySqlNewspaperRepository repository = new MySqlNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
         Newspaper newsPaper = new Newspaper(new PeriodicalId(NEW_NEWSPAPER_ID));
         newsPaper.setName(NEW_NEWSPAPER_NAME);
 

@@ -1,7 +1,7 @@
 package net.gartee.openperiodical.core.commandhandlers;
 
 import net.gartee.openperiodical.core.commands.CreateNewspaper;
-import net.gartee.openperiodical.core.dataaccess.NewspaperRepository;
+import net.gartee.openperiodical.core.persistence.repositories.NewspaperRepository;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.exceptions.EntityAlreadyExistsException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;

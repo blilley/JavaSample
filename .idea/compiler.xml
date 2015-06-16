@@ -23,7 +23,6 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="core" />
-        <module name="mysql" />
         <module name="web" />
       </profile>
     </annotationProcessing>

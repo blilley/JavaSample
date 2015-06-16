@@ -1,4 +1,4 @@
-package net.gartee.openperiodical.data.entities;
+package net.gartee.openperiodical.core.persistence.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -3,8 +3,8 @@ package net.gartee.openperiodical.mvc;
 import net.gartee.cqrs.CommandHandler;
 import net.gartee.openperiodical.core.commandhandlers.CreateNewspaperHandler;
 import net.gartee.openperiodical.core.commands.CreateNewspaper;
-import net.gartee.openperiodical.data.mysql.HibernateUtil;
-import net.gartee.openperiodical.data.mysql.MySqlNewspaperRepository;
+import net.gartee.openperiodical.core.persistence.repositories.HibernateUtil;
+import net.gartee.openperiodical.core.persistence.repositories.MySqlNewspaperRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

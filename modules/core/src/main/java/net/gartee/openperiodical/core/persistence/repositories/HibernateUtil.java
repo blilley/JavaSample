@@ -1,6 +1,6 @@
-package net.gartee.openperiodical.data.mysql;
+package net.gartee.openperiodical.core.persistence.repositories;
 
-import net.gartee.openperiodical.data.entities.NewspaperData;
+import net.gartee.openperiodical.core.persistence.entities.NewspaperData;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

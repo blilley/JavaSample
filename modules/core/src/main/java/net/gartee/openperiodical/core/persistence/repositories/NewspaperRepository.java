@@ -1,4 +1,4 @@
-package net.gartee.openperiodical.core.dataaccess;
+package net.gartee.openperiodical.core.persistence.repositories;
 
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
