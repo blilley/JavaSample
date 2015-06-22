@@ -9,7 +9,6 @@ import javax.persistence.Table;
 @Table(name = "newspaper")
 public class NewspaperData {
     @Id
-    @GeneratedValue
     private int id;
     private String name;
 

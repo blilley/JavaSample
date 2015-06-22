@@ -4,21 +4,21 @@ import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.exceptions.EntityDoesNotExistException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 import net.gartee.openperiodical.core.persistence.entities.NewspaperData;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class HibernateNewspaperRepository implements NewspaperRepository {
-    private final Session session;
+    private final SessionFactory sessionFactory;
 
     @Autowired
-    public HibernateNewspaperRepository(Session session) {
-        this.session = session;
+    public HibernateNewspaperRepository(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     public Newspaper get(PeriodicalId id) {
-        NewspaperData data = (NewspaperData) session.get(NewspaperData.class, id.getValue());
+        NewspaperData data = (NewspaperData) sessionFactory.getCurrentSession().get(NewspaperData.class, id.getValue());
         if(data ==  null) {
             throw new EntityDoesNotExistException(id);
         }
@@ -34,11 +34,11 @@ public class HibernateNewspaperRepository implements NewspaperRepository {
         data.setId(newspaper.getId().getValue());
         data.setName(newspaper.getName());
 
-        session.saveOrUpdate(data);
+        sessionFactory.getCurrentSession().saveOrUpdate(data);
     }
 
     public boolean exists(PeriodicalId id) {
-        NewspaperData data = (NewspaperData) session.get(NewspaperData.class, id.getValue());
+        NewspaperData data = (NewspaperData) sessionFactory.getCurrentSession().get(NewspaperData.class, id.getValue());
         return data != null;
     }
 }

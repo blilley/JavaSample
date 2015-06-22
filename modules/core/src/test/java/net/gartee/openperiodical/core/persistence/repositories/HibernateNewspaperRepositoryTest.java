@@ -5,6 +5,7 @@ import net.gartee.openperiodical.core.exceptions.EntityDoesNotExistException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 import net.gartee.openperiodical.core.persistence.entities.NewspaperData;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.Before;
@@ -24,8 +25,8 @@ public class HibernateNewspaperRepositoryTest {
     private static final int NEW_NEWSPAPER_ID = 2;
     private static final String NEW_NEWSPAPER_NAME = "New Newspaper";
 
+    private SessionFactory sessionFactory;
     private Session session;
-    private Transaction transaction;
 
     @BeforeClass
     public static void setupDatabase() {
@@ -34,13 +35,14 @@ public class HibernateNewspaperRepositoryTest {
 
     @Before
     public void setupSession() {
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
-        transaction = session.beginTransaction();
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.getCurrentSession();
+        sessionFactory.getCurrentSession().beginTransaction();
     }
 
     @Test
     public void get_WithExistingId_ReturnsNewspaper() {
-        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(sessionFactory);
         PeriodicalId newspaperId = new PeriodicalId(EXISTING_NEWSPAPER_ID);
 
         Newspaper newspaper = repository.get(newspaperId);
@@ -51,7 +53,7 @@ public class HibernateNewspaperRepositoryTest {
 
     @Test(expected = EntityDoesNotExistException.class)
     public void get_WithNonExistentId_ThrowsException() {
-        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(sessionFactory);
         PeriodicalId newspaperId = new PeriodicalId(NEW_NEWSPAPER_ID);
 
         repository.get(newspaperId);
@@ -59,7 +61,7 @@ public class HibernateNewspaperRepositoryTest {
 
     @Test
     public void exists_WhenIdExists_ReturnsTrue() {
-        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(sessionFactory);
         PeriodicalId newspaperId = new PeriodicalId(EXISTING_NEWSPAPER_ID);
 
         assertTrue(repository.exists(newspaperId));
@@ -67,7 +69,7 @@ public class HibernateNewspaperRepositoryTest {
 
     @Test
     public void exists_WhenIdDoesNotExist_ReturnsFalse() {
-        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(sessionFactory);
         PeriodicalId newspaperId = new PeriodicalId(NEW_NEWSPAPER_ID);
 
         assertFalse(repository.exists(newspaperId));
@@ -75,7 +77,7 @@ public class HibernateNewspaperRepositoryTest {
 
     @Test
     public void save_WithExistingNewspaper_UpdatesRecord() {
-        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(sessionFactory);
         Newspaper newsPaper = new Newspaper(new PeriodicalId(EXISTING_NEWSPAPER_ID));
         newsPaper.setName(UPDATED_NEWSPAPER_NAME);
 
@@ -88,7 +90,7 @@ public class HibernateNewspaperRepositoryTest {
 
     @Test
     public void save_WithNewNewspaper_InsertsRecord() {
-        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(session);
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(sessionFactory);
         Newspaper newsPaper = new Newspaper(new PeriodicalId(NEW_NEWSPAPER_ID));
         newsPaper.setName(NEW_NEWSPAPER_NAME);
 
@@ -101,7 +103,7 @@ public class HibernateNewspaperRepositoryTest {
 
     @After
     public void rollBackTransaction() {
-        transaction.rollback();
+        session.getTransaction().rollback();
     }
 
     private static void SeedDatabase(Session session) {
