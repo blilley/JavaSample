@@ -5,10 +5,14 @@ import net.gartee.openperiodical.core.exceptions.EntityDoesNotExistException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 import net.gartee.openperiodical.core.persistence.entities.NewspaperData;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class HibernateNewspaperRepository implements NewspaperRepository {
     private final Session session;
 
+    @Autowired
     public HibernateNewspaperRepository(Session session) {
         this.session = session;
     }

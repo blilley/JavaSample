@@ -1,4 +1,4 @@
-package net.gartee.openperiodical.mvc;
+package net.gartee.openperiodical.mvc.controllers;
 
 import net.gartee.cqrs.CommandHandler;
 import net.gartee.openperiodical.core.commands.CreateNewspaper;
