@@ -1,6 +1,6 @@
 package net.gartee.openperiodical.core.commands;
 
-import net.gartee.cqrs.Command;
+import net.gartee.common.Command;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 
 public class CreateNewspaper implements Command {

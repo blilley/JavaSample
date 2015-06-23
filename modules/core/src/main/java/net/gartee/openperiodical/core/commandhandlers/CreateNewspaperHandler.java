@@ -1,6 +1,6 @@
 package net.gartee.openperiodical.core.commandhandlers;
 
-import net.gartee.cqrs.CommandHandler;
+import net.gartee.common.CommandHandler;
 import net.gartee.openperiodical.core.commands.CreateNewspaper;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
