@@ -34,7 +34,7 @@ public class HibernateNewspaperRepository implements NewspaperRepository {
         data.setId(newspaper.getId().getValue());
         data.setName(newspaper.getName());
 
-        sessionFactory.getCurrentSession().saveOrUpdate(data);
+        sessionFactory.getCurrentSession().merge(data);
     }
 
     public boolean exists(PeriodicalId id) {

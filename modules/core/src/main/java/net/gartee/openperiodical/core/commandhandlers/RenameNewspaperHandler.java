@@ -1,6 +1,5 @@
 package net.gartee.openperiodical.core.commandhandlers;
 
-import net.gartee.common.CommandHandler;
 import net.gartee.openperiodical.core.commands.RenameNewspaper;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.persistence.repositories.NewspaperRepository;
@@ -11,7 +10,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class RenameNewspaperHandler implements CommandHandler<RenameNewspaper>{
+public class RenameNewspaperHandler extends CommandHandler<RenameNewspaper>{
     private final NewspaperRepository newspaperRepository;
 
     @Autowired
