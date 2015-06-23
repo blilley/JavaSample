@@ -3,6 +3,7 @@ package net.gartee.openperiodical.core.commandhandlers;
 import net.gartee.common.CommandHandler;
 import net.gartee.openperiodical.core.commands.CreateNewspaper;
 import net.gartee.openperiodical.core.entities.Newspaper;
+import net.gartee.openperiodical.core.exceptions.EntityAlreadyExistsException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 import net.gartee.openperiodical.core.persistence.repositories.NewspaperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class CreateNewspaperHandler implements CommandHandler<CreateNewspaper> {
-
     private final NewspaperRepository newspaperRepository;
 
     @Autowired
@@ -26,6 +26,7 @@ public class CreateNewspaperHandler implements CommandHandler<CreateNewspaper> {
         newspaper.setName(command.getNewspaperName());
 
         Guard.thatNameIsNotEmpty(newspaper);
+        Guard.thatNewspaperDoesNotExist(newspaper, newspaperRepository);
 
         newspaperRepository.save(newspaper);
     }
@@ -41,6 +42,12 @@ public class CreateNewspaperHandler implements CommandHandler<CreateNewspaper> {
 
         private static String buildMessage(PeriodicalId periodicalId) {
             return String.format(EMPTY_NAME_MESSAGE_TEMPLATE, periodicalId);
+        }
+
+        private static void thatNewspaperDoesNotExist(Newspaper newspaper, NewspaperRepository newspaperRepository) {
+            if(newspaperRepository.exists(newspaper.getId())) {
+                throw new EntityAlreadyExistsException(newspaper.getId());
+            }
         }
     }
 }
