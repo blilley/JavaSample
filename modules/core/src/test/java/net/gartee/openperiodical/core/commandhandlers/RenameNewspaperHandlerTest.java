@@ -7,6 +7,8 @@ import net.gartee.openperiodical.core.persistence.repositories.NewspaperReposito
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.util.UUID;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.isA;
@@ -14,7 +16,7 @@ import static org.mockito.Mockito.*;
 
 public class RenameNewspaperHandlerTest {
 
-    private static final int NEWSPAPER_ID = 1;
+    private static final UUID NEWSPAPER_ID = UUID.fromString("4544bb77-b977-491f-8cbd-49ea85cc1731");
     private static final String NEWSPAPER_NAME = "Newspaper";
     private static final String NEWSPAPER_RENAME = "Newspaper Renamed";
 

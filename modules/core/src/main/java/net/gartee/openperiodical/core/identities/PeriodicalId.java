@@ -1,13 +1,15 @@
 package net.gartee.openperiodical.core.identities;
 
-public class PeriodicalId {
-    private int value;
+import java.util.UUID;
 
-    public PeriodicalId(int value) {
+public class PeriodicalId {
+    private UUID value;
+
+    public PeriodicalId(UUID value) {
         this.value = value;
     }
 
-    public int getValue() {
+    public UUID getValue() {
         return value;
     }
 
