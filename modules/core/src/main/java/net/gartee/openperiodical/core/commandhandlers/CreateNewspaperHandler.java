@@ -1,6 +1,5 @@
 package net.gartee.openperiodical.core.commandhandlers;
 
-import net.gartee.common.CommandHandler;
 import net.gartee.openperiodical.core.commands.CreateNewspaper;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.exceptions.EntityAlreadyExistsException;
@@ -13,7 +12,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class CreateNewspaperHandler implements CommandHandler<CreateNewspaper> {
+public class CreateNewspaperHandler extends CommandHandler<CreateNewspaper> {
     private final NewspaperRepository newspaperRepository;
 
     @Autowired
@@ -21,6 +20,7 @@ public class CreateNewspaperHandler implements CommandHandler<CreateNewspaper> {
         this.newspaperRepository = repository;
     }
 
+    @Override
     public void handle(CreateNewspaper command) {
         Newspaper newspaper = new Newspaper(command.getNewspaperId());
         newspaper.setName(command.getNewspaperName());

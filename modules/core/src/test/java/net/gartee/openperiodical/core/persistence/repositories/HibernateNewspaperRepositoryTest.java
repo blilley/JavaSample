@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.UUID;
+
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -19,10 +21,10 @@ import static org.hamcrest.Matchers.is;
 
 public class HibernateNewspaperRepositoryTest {
 
-    private static final int EXISTING_NEWSPAPER_ID = 1;
+    private static final UUID EXISTING_NEWSPAPER_ID = UUID.fromString("140060a3-c437-4be5-a533-001dfb1a9168");
     private static final String EXISTING_NEWSPAPER_NAME = "Existing Newspaper";
     private static final String UPDATED_NEWSPAPER_NAME = "Updated Newspaper";
-    private static final int NEW_NEWSPAPER_ID = 2;
+    private static final UUID NEW_NEWSPAPER_ID = UUID.fromString("4544bb77-b977-491f-8cbd-49ea85cc1731");
     private static final String NEW_NEWSPAPER_NAME = "New Newspaper";
 
     private SessionFactory sessionFactory;

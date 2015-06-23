@@ -24,8 +24,8 @@
                     <tr>
                         <td>${newspaper.id}</td>
                         <td>
-                            <span class="col-md-11">${newspaper.name}</span>
-                            <a class="btn btn-default col-md-1" href="<c:url value="/Delete/${newspaper.id}" />">
+                            <span class="col-md-10">${newspaper.name}</span>
+                            <a class="btn btn-default col-md-2" href="<c:url value="/Delete/${newspaper.id}" />">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         </td>

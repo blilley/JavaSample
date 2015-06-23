@@ -19,6 +19,7 @@ hs_err_pid*
 # Intellij
 workspace.xml
 tasks.xml
+out
 
 # Mac
 .DS_Store

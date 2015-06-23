@@ -8,6 +8,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 public class HibernateNewspaperRepository implements NewspaperRepository {
     private final SessionFactory sessionFactory;
@@ -34,11 +37,30 @@ public class HibernateNewspaperRepository implements NewspaperRepository {
         data.setId(newspaper.getId().getValue());
         data.setName(newspaper.getName());
 
-        sessionFactory.getCurrentSession().saveOrUpdate(data);
+        sessionFactory.getCurrentSession().merge(data);
     }
 
     public boolean exists(PeriodicalId id) {
         NewspaperData data = (NewspaperData) sessionFactory.getCurrentSession().get(NewspaperData.class, id.getValue());
         return data != null;
+    }
+
+    @Override
+    public List<Newspaper> getAll()
+    {
+        List<NewspaperData> newspaperDatas = sessionFactory.getCurrentSession()
+                .createCriteria(NewspaperData.class).list();
+
+        List<Newspaper> newspapers = new ArrayList();
+
+        for (NewspaperData data : newspaperDatas)
+        {
+            Newspaper newspaper = new Newspaper(new PeriodicalId(data.getId()));
+            newspaper.setName(data.getName());
+
+            newspapers.add(newspaper);
+        }
+
+        return newspapers;
     }
 }
