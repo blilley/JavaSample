@@ -3,20 +3,20 @@ package net.gartee.openperiodical.core.commands;
 import net.gartee.common.Command;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 
-public class CreateNewspaper implements Command {
+public class RenameNewspaper implements Command {
     private PeriodicalId newspaperId;
-    private String newspaperName;
+    private String newName;
 
-    public CreateNewspaper(PeriodicalId newspaperId, String newspaperName) {
+    public RenameNewspaper(PeriodicalId newspaperId, String newName) {
         this.newspaperId = newspaperId;
-        this.newspaperName = newspaperName;
+        this.newName = newName;
     }
 
     public PeriodicalId getNewspaperId() {
         return newspaperId;
     }
 
-    public String getNewspaperName() {
-        return newspaperName;
+    public String getNewName() {
+        return newName;
     }
 }

@@ -1,7 +1,7 @@
 package net.gartee.openperiodical.core.exceptions;
 
 public class EntityAlreadyExistsException extends RuntimeException {
-    private static final String MESSAGE_TEMPLATE = "Cannot insert entity (%s). That ID is already in use.";
+    private static final String MESSAGE_TEMPLATE = "Entity already exists (%s).";
 
     public EntityAlreadyExistsException(Object id) {
         super(buildMessage(id));

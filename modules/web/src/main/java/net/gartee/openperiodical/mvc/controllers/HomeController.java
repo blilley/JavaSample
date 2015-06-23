@@ -1,6 +1,6 @@
 package net.gartee.openperiodical.mvc.controllers;
 
-import net.gartee.cqrs.CommandHandler;
+import net.gartee.common.CommandHandler;
 import net.gartee.openperiodical.core.commands.CreateNewspaper;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
@@ -35,6 +35,7 @@ public class HomeController {
     @RequestMapping(value = "Create", method = RequestMethod.POST)
     public String createNewsPaper(@RequestParam String title)
     {
+        //TODO: Change ID to be a GUID so we can generate it instead?
         CreateNewspaper command = new CreateNewspaper(new PeriodicalId(2), title);
 
         createNewspaperCommandHandler.handle(command);

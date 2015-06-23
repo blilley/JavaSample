@@ -1,4 +1,4 @@
-package net.gartee.cqrs;
+package net.gartee.common;
 
 public interface Command {
 }
