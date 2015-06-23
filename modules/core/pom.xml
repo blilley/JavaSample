@@ -12,6 +12,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <spring.version>4.1.6.RELEASE</spring.version>
+        <jstl.version>1.2</jstl.version>
     </properties>
 
     <dependencies>
@@ -57,6 +58,13 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.35</version>
+        </dependency>
+
+        <!-- jstl -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
         </dependency>
 
         <!--<dependency>-->
