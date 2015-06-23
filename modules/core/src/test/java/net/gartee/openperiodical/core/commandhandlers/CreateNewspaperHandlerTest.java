@@ -1,17 +1,16 @@
 package net.gartee.openperiodical.core.commandhandlers;
 
 import net.gartee.openperiodical.core.commands.CreateNewspaper;
-import net.gartee.openperiodical.core.persistence.repositories.NewspaperRepository;
 import net.gartee.openperiodical.core.entities.Newspaper;
-import net.gartee.openperiodical.core.exceptions.EntityAlreadyExistsException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
+import net.gartee.openperiodical.core.persistence.repositories.NewspaperRepository;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class CreateNewspaperHandlerTest {
 
@@ -46,16 +45,6 @@ public class CreateNewspaperHandlerTest {
         NewspaperRepository repository = mock(NewspaperRepository.class);
 
         CreateNewspaper command = new CreateNewspaper(new PeriodicalId(NEWSPAPER_ID), "");
-        CreateNewspaperHandler handler = new CreateNewspaperHandler(repository);
-        handler.handle(command);
-    }
-
-    @Test(expected = EntityAlreadyExistsException.class)
-    public void handle_WithExistingNewspaper_ThrowsException() {
-        NewspaperRepository repository = mock(NewspaperRepository.class);
-        when(repository.exists(anyObject())).thenReturn(true);
-
-        CreateNewspaper command = new CreateNewspaper(new PeriodicalId(NEWSPAPER_ID), NEWSPAPER_NAME);
         CreateNewspaperHandler handler = new CreateNewspaperHandler(repository);
         handler.handle(command);
     }
