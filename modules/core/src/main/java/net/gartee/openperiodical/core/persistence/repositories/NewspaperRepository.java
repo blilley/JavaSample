@@ -12,4 +12,6 @@ public interface NewspaperRepository {
     boolean exists(PeriodicalId id);
 
     List<Newspaper> getAll();
+
+    void delete(PeriodicalId id);
 }

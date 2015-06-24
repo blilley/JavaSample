@@ -18,6 +18,7 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 public class HibernateNewspaperRepositoryTest {
 
@@ -101,6 +102,16 @@ public class HibernateNewspaperRepositoryTest {
         NewspaperData newsPaperData = (NewspaperData) session.get(NewspaperData.class, NEW_NEWSPAPER_ID);
         assertThat(newsPaperData.getId(), is(NEW_NEWSPAPER_ID));
         assertThat(newsPaperData.getName(), is(NEW_NEWSPAPER_NAME));
+    }
+
+    @Test
+    public void delete_WithExistingNewspaper_DeletesRecord() {
+        HibernateNewspaperRepository repository = new HibernateNewspaperRepository(sessionFactory);
+
+        repository.delete(new PeriodicalId(EXISTING_NEWSPAPER_ID));
+
+        NewspaperData newsPaperData = (NewspaperData) session.get(NewspaperData.class, EXISTING_NEWSPAPER_ID);
+        assertThat(newsPaperData, is(nullValue()));
     }
 
     @After

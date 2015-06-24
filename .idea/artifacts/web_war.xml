@@ -4,9 +4,7 @@
     <root id="archive" name="web_war.war">
       <element id="artifact" artifact-name="web:war exploded" />
       <element id="directory" name="WEB-INF">
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="Thymeleaf-2.1.4" />
-        </element>
+        <element id="directory" name="lib" />
       </element>
     </root>
   </artifact>

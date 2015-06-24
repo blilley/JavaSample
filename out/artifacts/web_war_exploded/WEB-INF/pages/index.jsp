@@ -7,8 +7,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<script src="/resources/js/openperiodical.js"></script>
 <%@ include file="/WEB-INF/pages/header.jspf" %>
+
+<%--IMPORTANT, CSRF IS REQUIRED FOR PUT AND DELETE, THIS IS BASIC SPRING SECURITY--%>
+<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
+<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
+
 <div style="padding-top: 51px;" class="container-fluid">
     <div class="col-md-offset-3 col-md-6">
         <h1>Welcome to Open Periodical</h1>
@@ -25,7 +30,7 @@
                         <td>${newspaper.id}</td>
                         <td>
                             <span class="col-md-10">${newspaper.name}</span>
-                            <a class="btn btn-default col-md-2" href="<c:url value="/Delete/${newspaper.id}" />">
+                            <a class="btn btn-default col-md-2" onclick="deleteNewspaper('${newspaper.id}')">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         </td>
