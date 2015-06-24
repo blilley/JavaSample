@@ -1,8 +1,8 @@
 package net.gartee.openperiodical.mvc.controllers;
 
 import net.gartee.openperiodical.core.commandhandlers.CommandHandler;
-import net.gartee.openperiodical.core.commands.CreateNewspaper;
-import net.gartee.openperiodical.core.commands.RenameNewspaper;
+import net.gartee.openperiodical.core.commands.CreateNewspaperCommand;
+import net.gartee.openperiodical.core.commands.RenameNewspaperCommand;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 
     @Autowired
-    private CommandHandler<CreateNewspaper> createNewspaperCommandHandler;
+    private CommandHandler<CreateNewspaperCommand> createNewspaperCommandHandler;
 
     @Autowired
-    private CommandHandler<RenameNewspaper> renameNewspaperCommandHandler;
+    private CommandHandler<RenameNewspaperCommand> renameNewspaperCommandHandler;
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(ModelMap model) {
         model.addAttribute("name", "you");
 
         renameNewspaperCommandHandler.handle(
-                new RenameNewspaper(new PeriodicalId(5), "rawr!")
+                new RenameNewspaperCommand(new PeriodicalId(5), "rawr!")
         );
 
         return "index"; // view name (jsp)

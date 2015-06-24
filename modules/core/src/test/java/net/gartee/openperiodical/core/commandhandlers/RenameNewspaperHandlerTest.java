@@ -1,6 +1,6 @@
 package net.gartee.openperiodical.core.commandhandlers;
 
-import net.gartee.openperiodical.core.commands.RenameNewspaper;
+import net.gartee.openperiodical.core.commands.RenameNewspaperCommand;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 import net.gartee.openperiodical.core.persistence.repositories.NewspaperRepository;
@@ -27,7 +27,7 @@ public class RenameNewspaperHandlerTest {
         when(repository.get(isA(PeriodicalId.class))).thenReturn(newspaper);
         ArgumentCaptor<Newspaper> newspaperCaptor = ArgumentCaptor.forClass(Newspaper.class);
 
-        RenameNewspaper command = new RenameNewspaper(new PeriodicalId(NEWSPAPER_ID), NEWSPAPER_RENAME);
+        RenameNewspaperCommand command = new RenameNewspaperCommand(new PeriodicalId(NEWSPAPER_ID), NEWSPAPER_RENAME);
         RenameNewspaperHandler handler = new RenameNewspaperHandler(repository);
         handler.handle(command);
 

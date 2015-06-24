@@ -1,6 +1,6 @@
 package net.gartee.openperiodical.core.commandhandlers;
 
-import net.gartee.openperiodical.core.commands.CreateNewspaper;
+import net.gartee.openperiodical.core.commands.CreateNewspaperCommand;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 import net.gartee.openperiodical.core.persistence.repositories.NewspaperRepository;
@@ -22,7 +22,7 @@ public class CreateNewspaperHandlerTest {
         NewspaperRepository repository = mock(NewspaperRepository.class);
         ArgumentCaptor<Newspaper> newspaperCaptor = ArgumentCaptor.forClass(Newspaper.class);
 
-        CreateNewspaper command = new CreateNewspaper(new PeriodicalId(NEWSPAPER_ID), NEWSPAPER_NAME);
+        CreateNewspaperCommand command = new CreateNewspaperCommand(new PeriodicalId(NEWSPAPER_ID), NEWSPAPER_NAME);
         CreateNewspaperHandler handler = new CreateNewspaperHandler(repository);
         handler.handle(command);
 
@@ -35,7 +35,7 @@ public class CreateNewspaperHandlerTest {
     public void handle_WithNullNewspaperName_ThrowsException() {
         NewspaperRepository repository = mock(NewspaperRepository.class);
 
-        CreateNewspaper command = new CreateNewspaper(new PeriodicalId(NEWSPAPER_ID), null);
+        CreateNewspaperCommand command = new CreateNewspaperCommand(new PeriodicalId(NEWSPAPER_ID), null);
         CreateNewspaperHandler handler = new CreateNewspaperHandler(repository);
         handler.handle(command);
     }
@@ -44,7 +44,7 @@ public class CreateNewspaperHandlerTest {
     public void handle_WithEmptyNewspaperName_ThrowsException() {
         NewspaperRepository repository = mock(NewspaperRepository.class);
 
-        CreateNewspaper command = new CreateNewspaper(new PeriodicalId(NEWSPAPER_ID), "");
+        CreateNewspaperCommand command = new CreateNewspaperCommand(new PeriodicalId(NEWSPAPER_ID), "");
         CreateNewspaperHandler handler = new CreateNewspaperHandler(repository);
         handler.handle(command);
     }

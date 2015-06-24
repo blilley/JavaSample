@@ -8,6 +8,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 public class HibernateNewspaperRepository implements NewspaperRepository {
     private final SessionFactory sessionFactory;
@@ -23,10 +26,23 @@ public class HibernateNewspaperRepository implements NewspaperRepository {
             throw new EntityDoesNotExistException(id);
         }
 
-        Newspaper newspaper = new Newspaper(new PeriodicalId(data.getId()));
-        newspaper.setName(data.getName());
+        Newspaper newspaper = toDomainModel(data);
 
         return newspaper;
+    }
+
+    public List<Newspaper> getAll() {
+        List<NewspaperData> data = sessionFactory.getCurrentSession().createCriteria(NewspaperData.class).list();
+        List<Newspaper> newspapers = new ArrayList<>();
+        for(NewspaperData newspaperData : data) {
+            newspapers.add(toDomainModel(newspaperData));
+        }
+
+        return newspapers;
+    }
+
+    public List<Newspaper> fetchByNameContains(String nameContains) {
+        return null;
     }
 
     public void save(Newspaper newspaper) {
@@ -40,5 +56,11 @@ public class HibernateNewspaperRepository implements NewspaperRepository {
     public boolean exists(PeriodicalId id) {
         NewspaperData data = (NewspaperData) sessionFactory.getCurrentSession().get(NewspaperData.class, id.getValue());
         return data != null;
+    }
+
+    private Newspaper toDomainModel(NewspaperData data) {
+        Newspaper newspaper = new Newspaper(new PeriodicalId(data.getId()));
+        newspaper.setName(data.getName());
+        return newspaper;
     }
 }
