@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,7 +32,6 @@ public class HomeController {
         this.listNewspapersQuery = listNewspapersQuery;
     }
 
-    @Transactional
     @RequestMapping(method = RequestMethod.GET)
     public String getList(ModelMap model) {
         List<Newspaper> newspapers = listNewspapersQuery.execute(
@@ -53,6 +51,7 @@ public class HomeController {
                 title);
 
         createNewspaperCommandHandler.handle(command);
+        // alt. send to domain command bus
 
         return "redirect:/";
     }

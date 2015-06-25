@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class IssueId {
-    private static final String TO_STRING_TEMPLATE = "%1 - %2";
+    private static final String TO_STRING_TEMPLATE = "%s - %s";
 
     private PeriodicalId periodicalId;
     private Date publicationDate;
