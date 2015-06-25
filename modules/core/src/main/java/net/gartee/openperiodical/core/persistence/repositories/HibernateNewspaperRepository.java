@@ -58,6 +58,12 @@ public class HibernateNewspaperRepository implements NewspaperRepository {
         return data != null;
     }
 
+    public void delete(PeriodicalId id)
+    {
+        NewspaperData data = (NewspaperData)sessionFactory.getCurrentSession().get(NewspaperData.class, id.getValue());
+        sessionFactory.getCurrentSession().delete(data);
+    }
+
     private Newspaper toDomainModel(NewspaperData data) {
         Newspaper newspaper = new Newspaper(new PeriodicalId(data.getId()));
         newspaper.setName(data.getName());

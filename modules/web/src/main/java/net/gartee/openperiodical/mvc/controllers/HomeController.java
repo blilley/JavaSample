@@ -30,7 +30,7 @@ public class HomeController {
         this.renameNewspaperCommandHandler = renameNewspaperCommandHandler;
         this.listNewspapersQuery = listNewspapersQuery;
     }
-    
+
     @RequestMapping(method = RequestMethod.GET)
     public String index(ModelMap model) {
         model.addAttribute("name", "you");

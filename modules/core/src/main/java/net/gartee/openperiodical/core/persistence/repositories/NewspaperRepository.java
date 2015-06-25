@@ -11,4 +11,5 @@ public interface NewspaperRepository {
     List<Newspaper> fetchByNameContains(String nameContains);
     void save(Newspaper newspaper);
     boolean exists(PeriodicalId id);
+    void delete(PeriodicalId periodicalId);
 }
