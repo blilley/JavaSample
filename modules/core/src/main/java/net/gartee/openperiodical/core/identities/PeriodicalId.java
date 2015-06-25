@@ -30,4 +30,8 @@ public class PeriodicalId {
     public String toString() {
         return String.valueOf(getValue());
     }
+
+    public static PeriodicalId newId() {
+        return new PeriodicalId(UUID.randomUUID());
+    }
 }

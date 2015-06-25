@@ -1,6 +1,6 @@
 package net.gartee.openperiodical.core.commandhandlers;
 
-import net.gartee.openperiodical.core.commands.RenameNewspaperCommand;
+import net.gartee.openperiodical.core.commands.RenameNewspaper;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.exceptions.EntityDoesNotExistException;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class RenameNewspaperHandler extends CommandHandler<RenameNewspaperCommand>{
+public class RenameNewspaperHandler extends CommandHandler<RenameNewspaper>{
     private final NewspaperRepository newspaperRepository;
 
     @Autowired
@@ -21,7 +21,7 @@ public class RenameNewspaperHandler extends CommandHandler<RenameNewspaperComman
     }
 
     @Override
-    public void handle(RenameNewspaperCommand command) {
+    public void handle(RenameNewspaper command) {
         Guard.thatNewspaperExists(command.getNewspaperId(), newspaperRepository);
 
         Newspaper newspaper = newspaperRepository.get(command.getNewspaperId());

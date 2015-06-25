@@ -1,8 +1,8 @@
 package net.gartee.openperiodical.mvc.controllers;
 
 import net.gartee.openperiodical.core.commandhandlers.CommandHandler;
-import net.gartee.openperiodical.core.commands.CreateNewspaperCommand;
-import net.gartee.openperiodical.core.commands.DeleteNewspaperCommand;
+import net.gartee.openperiodical.core.commands.CreateNewspaper;
+import net.gartee.openperiodical.core.commands.DeleteNewspaper;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 import net.gartee.openperiodical.core.queries.ListNewspapersCriteria;
@@ -20,13 +20,13 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/")
 public class HomeController {
-    private CommandHandler<CreateNewspaperCommand> createNewspaperCommandHandler;
-    private CommandHandler<DeleteNewspaperCommand> deleteNewspaperCommandHandler;
+    private CommandHandler<CreateNewspaper> createNewspaperCommandHandler;
+    private CommandHandler<DeleteNewspaper> deleteNewspaperCommandHandler;
     private Query<ListNewspapersCriteria, List<Newspaper>> listNewspapersQuery;
 
     @Autowired
-    public HomeController(CommandHandler<CreateNewspaperCommand> createNewspaperCommandHandler,
-                          CommandHandler<DeleteNewspaperCommand> deleteNewspaperCommandHandler,
+    public HomeController(CommandHandler<CreateNewspaper> createNewspaperCommandHandler,
+                          CommandHandler<DeleteNewspaper> deleteNewspaperCommandHandler,
                           Query<ListNewspapersCriteria, List<Newspaper>> listNewspapersQuery) {
         this.createNewspaperCommandHandler = createNewspaperCommandHandler;
         this.deleteNewspaperCommandHandler = deleteNewspaperCommandHandler;
@@ -35,9 +35,11 @@ public class HomeController {
 
     @Transactional
     @RequestMapping(method = RequestMethod.GET)
-    public String index(ModelMap model) {
+    public String getList(ModelMap model) {
         List<Newspaper> newspapers = listNewspapersQuery.execute(
             new ListNewspapersCriteria());
+
+        // todo: convert domain models to view models
 
         model.addAttribute("newspapers", newspapers);
         return "index";
@@ -46,8 +48,10 @@ public class HomeController {
     @RequestMapping(value = "Create", method = RequestMethod.POST)
     public String createNewsPaper(@RequestParam String title)
     {
-        CreateNewspaperCommand command = new CreateNewspaperCommand(
-            new PeriodicalId(UUID.randomUUID()), title);
+        CreateNewspaper command = new CreateNewspaper(
+                PeriodicalId.newId(),
+                title);
+
         createNewspaperCommandHandler.handle(command);
 
         return "redirect:/";
@@ -57,7 +61,7 @@ public class HomeController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteNewspaper(@PathVariable("id") UUID id)
     {
-        DeleteNewspaperCommand command = new DeleteNewspaperCommand(
+        DeleteNewspaper command = new DeleteNewspaper(
             new PeriodicalId(id));
         deleteNewspaperCommandHandler.handle(command);
     }
