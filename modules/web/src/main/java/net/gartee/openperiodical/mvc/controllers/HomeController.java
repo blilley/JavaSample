@@ -3,7 +3,6 @@ package net.gartee.openperiodical.mvc.controllers;
 import net.gartee.openperiodical.core.commandhandlers.CommandHandler;
 import net.gartee.openperiodical.core.commands.CreateNewspaperCommand;
 import net.gartee.openperiodical.core.commands.DeleteNewspaperCommand;
-import net.gartee.openperiodical.core.commands.RenameNewspaperCommand;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 import net.gartee.openperiodical.core.queries.ListNewspapersCriteria;
@@ -22,17 +21,14 @@ import java.util.UUID;
 @RequestMapping("/")
 public class HomeController {
     private CommandHandler<CreateNewspaperCommand> createNewspaperCommandHandler;
-    private CommandHandler<RenameNewspaperCommand> renameNewspaperCommandHandler;
     private CommandHandler<DeleteNewspaperCommand> deleteNewspaperCommandHandler;
     private Query<ListNewspapersCriteria, List<Newspaper>> listNewspapersQuery;
 
     @Autowired
     public HomeController(CommandHandler<CreateNewspaperCommand> createNewspaperCommandHandler,
-                          CommandHandler<RenameNewspaperCommand> renameNewspaperCommandHandler,
                           CommandHandler<DeleteNewspaperCommand> deleteNewspaperCommandHandler,
                           Query<ListNewspapersCriteria, List<Newspaper>> listNewspapersQuery) {
         this.createNewspaperCommandHandler = createNewspaperCommandHandler;
-        this.renameNewspaperCommandHandler = renameNewspaperCommandHandler;
         this.deleteNewspaperCommandHandler = deleteNewspaperCommandHandler;
         this.listNewspapersQuery = listNewspapersQuery;
     }
@@ -41,7 +37,8 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String index(ModelMap model) {
         List<Newspaper> newspapers = listNewspapersQuery.execute(
-                new ListNewspapersCriteria());
+            new ListNewspapersCriteria());
+
         model.addAttribute("newspapers", newspapers);
         return "index";
     }
@@ -49,8 +46,8 @@ public class HomeController {
     @RequestMapping(value = "Create", method = RequestMethod.POST)
     public String createNewsPaper(@RequestParam String title)
     {
-        CreateNewspaperCommand command = new CreateNewspaperCommand(new PeriodicalId(UUID.randomUUID()), title);
-
+        CreateNewspaperCommand command = new CreateNewspaperCommand(
+            new PeriodicalId(UUID.randomUUID()), title);
         createNewspaperCommandHandler.handle(command);
 
         return "redirect:/";
@@ -60,8 +57,8 @@ public class HomeController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteNewspaper(@PathVariable("id") UUID id)
     {
-        DeleteNewspaperCommand command = new DeleteNewspaperCommand(new PeriodicalId(id));
-
+        DeleteNewspaperCommand command = new DeleteNewspaperCommand(
+            new PeriodicalId(id));
         deleteNewspaperCommandHandler.handle(command);
     }
 }

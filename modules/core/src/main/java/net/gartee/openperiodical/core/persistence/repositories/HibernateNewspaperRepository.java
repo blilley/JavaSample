@@ -69,13 +69,4 @@ public class HibernateNewspaperRepository implements NewspaperRepository {
         newspaper.setName(data.getName());
         return newspaper;
     }
-
-    @Override
-    public void delete(PeriodicalId id)
-    {
-        NewspaperData data = (NewspaperData)sessionFactory.getCurrentSession().get(NewspaperData.class, id.getValue());
-
-        sessionFactory.getCurrentSession().delete(data);
-    }
-    
 }

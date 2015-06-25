@@ -26,6 +26,7 @@ public class RenameNewspaperHandlerTest {
         newspaper.setName(NEWSPAPER_NAME);
 
         NewspaperRepository repository = mock(NewspaperRepository.class);
+        when(repository.exists(isA(PeriodicalId.class))).thenReturn(true);
         when(repository.get(isA(PeriodicalId.class))).thenReturn(newspaper);
         ArgumentCaptor<Newspaper> newspaperCaptor = ArgumentCaptor.forClass(Newspaper.class);
 

@@ -1,4 +1,4 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta lang="en">
@@ -17,27 +17,31 @@
 <div style="padding-top: 51px;" class="container-fluid">
     <div class="col-md-offset-3 col-md-6">
         <h1>Welcome to Open Periodical</h1>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <td>Id</td>
-                    <td>Title</td>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="newspaper" items="${newspapers}">
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>${newspaper.id}</td>
-                        <td>
-                            <span class="col-md-10">${newspaper.name}</span>
-                            <a class="btn btn-default col-md-2" onclick="deleteNewspaper('${newspaper.id}')">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
-                        </td>
+                        <td>Id</td>
+                        <td>Title</td>
+                        <td></td>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <c:forEach var="newspaper" items="${newspapers}">
+                        <tr>
+                            <td>${newspaper.id}</td>
+                            <td>${newspaper.name}</td>
+                            <td class="text-center">
+                                <a class="btn btn-default" onclick="deleteNewspaper('${newspaper.id}')">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
 
         <form action="/Create" method="post">
             <div class="form-group">
