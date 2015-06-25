@@ -2,11 +2,11 @@ package net.gartee.openperiodical.core.commands;
 
 import net.gartee.openperiodical.core.identities.PeriodicalId;
 
-public class RenameNewspaper extends Command {
+public class RenameNewspaperCommand extends Command {
     private PeriodicalId newspaperId;
     private String newName;
 
-    public RenameNewspaper(PeriodicalId newspaperId, String newName) {
+    public RenameNewspaperCommand(PeriodicalId newspaperId, String newName) {
         this.newspaperId = newspaperId;
         this.newName = newName;
     }

@@ -19,7 +19,7 @@
     <!-- org.hibernate.HibernateException: No CurrentSessionContext configured! -->
     <property name="hibernate.current_session_context_class">thread</property>
 
-    <!-- Outputs the SQL queries, should be disabled in Production -->
+    <!-- Outputs the SQL querycriteria, should be disabled in Production -->
     <property name="hibernate.show_sql">true</property>
 
     <!-- Dialect is required to let Hibernate know the Database Type, MySQL, Oracle etc

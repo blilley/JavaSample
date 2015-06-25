@@ -26,10 +26,23 @@ public class HibernateNewspaperRepository implements NewspaperRepository {
             throw new EntityDoesNotExistException(id);
         }
 
-        Newspaper newspaper = new Newspaper(new PeriodicalId(data.getId()));
-        newspaper.setName(data.getName());
+        Newspaper newspaper = toDomainModel(data);
 
         return newspaper;
+    }
+
+    public List<Newspaper> getAll() {
+        List<NewspaperData> data = sessionFactory.getCurrentSession().createCriteria(NewspaperData.class).list();
+        List<Newspaper> newspapers = new ArrayList<>();
+        for(NewspaperData newspaperData : data) {
+            newspapers.add(toDomainModel(newspaperData));
+        }
+
+        return newspapers;
+    }
+
+    public List<Newspaper> fetchByNameContains(String nameContains) {
+        return null;
     }
 
     public void save(Newspaper newspaper) {
@@ -45,23 +58,10 @@ public class HibernateNewspaperRepository implements NewspaperRepository {
         return data != null;
     }
 
-    @Override
-    public List<Newspaper> getAll()
-    {
-        List<NewspaperData> newspaperDatas = sessionFactory.getCurrentSession()
-                .createCriteria(NewspaperData.class).list();
-
-        List<Newspaper> newspapers = new ArrayList();
-
-        for (NewspaperData data : newspaperDatas)
-        {
-            Newspaper newspaper = new Newspaper(new PeriodicalId(data.getId()));
-            newspaper.setName(data.getName());
-
-            newspapers.add(newspaper);
-        }
-
-        return newspapers;
+    private Newspaper toDomainModel(NewspaperData data) {
+        Newspaper newspaper = new Newspaper(new PeriodicalId(data.getId()));
+        newspaper.setName(data.getName());
+        return newspaper;
     }
 
     @Override
@@ -71,4 +71,5 @@ public class HibernateNewspaperRepository implements NewspaperRepository {
 
         sessionFactory.getCurrentSession().delete(data);
     }
+    
 }
