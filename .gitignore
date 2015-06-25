@@ -10,7 +10,6 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-<<<<<<< HEAD
 
 # Eclipse
 .classpath
@@ -20,6 +19,7 @@ hs_err_pid*
 # Intellij
 workspace.xml
 tasks.xml
+out
 
 # Mac
 .DS_Store
@@ -27,5 +27,3 @@ tasks.xml
 # Maven
 log/
 target/
-=======
->>>>>>> 522d9d074130b23731fd095d5fe6eb3722d66af4
