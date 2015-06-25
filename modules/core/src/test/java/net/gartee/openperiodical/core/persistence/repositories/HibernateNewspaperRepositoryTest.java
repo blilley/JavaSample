@@ -129,7 +129,7 @@ public class HibernateNewspaperRepositoryTest {
 
         repository.delete(new PeriodicalId(EXISTING_NEWSPAPER_1_ID));
 
-        NewspaperData newsPaperData = (NewspaperData) session.get(NewspaperData.class, EXISTING_NEWSPAPER_ID);
+        NewspaperData newsPaperData = (NewspaperData) session.get(NewspaperData.class, EXISTING_NEWSPAPER_1_ID);
         assertThat(newsPaperData, is(nullValue()));
     }
 
