@@ -2,7 +2,7 @@ package net.gartee.openperiodical.mvc.controllers;
 
 import net.gartee.openperiodical.core.commandhandlers.CommandHandler;
 import net.gartee.openperiodical.core.commands.CreateNewspaperCommand;
-import net.gartee.openperiodical.core.commands.DeleteNewspaper;
+import net.gartee.openperiodical.core.commands.DeleteNewspaperCommand;
 import net.gartee.openperiodical.core.commands.RenameNewspaperCommand;
 import net.gartee.openperiodical.core.entities.Newspaper;
 import net.gartee.openperiodical.core.identities.PeriodicalId;
@@ -24,13 +24,13 @@ import java.util.UUID;
 public class HomeController {
     private CommandHandler<CreateNewspaperCommand> createNewspaperCommandHandler;
     private CommandHandler<RenameNewspaperCommand> renameNewspaperCommandHandler;
-    private CommandHandler<DeleteNewspaper> deleteNewspaperCommandHandler;
+    private CommandHandler<DeleteNewspaperCommand> deleteNewspaperCommandHandler;
     private Query<ListNewspapersCriteria, List<Newspaper>> listNewspapersQuery;
 
     @Autowired
     public HomeController(CommandHandler<CreateNewspaperCommand> createNewspaperCommandHandler,
                           CommandHandler<RenameNewspaperCommand> renameNewspaperCommandHandler,
-                          CommandHandler<DeleteNewspaper> deleteNewspaperCommandHandler,
+                          CommandHandler<DeleteNewspaperCommand> deleteNewspaperCommandHandler,
                           Query<ListNewspapersCriteria, List<Newspaper>> listNewspapersQuery) {
         this.createNewspaperCommandHandler = createNewspaperCommandHandler;
         this.renameNewspaperCommandHandler = renameNewspaperCommandHandler;
@@ -61,7 +61,7 @@ public class HomeController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteNewspaper(@PathVariable("id") UUID id)
     {
-        DeleteNewspaper command = new DeleteNewspaper(new PeriodicalId(id));
+        DeleteNewspaperCommand command = new DeleteNewspaperCommand(new PeriodicalId(id));
 
         deleteNewspaperCommandHandler.handle(command);
     }

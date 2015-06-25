@@ -1,6 +1,6 @@
 package net.gartee.openperiodical.core.commandhandlers;
 
-import net.gartee.openperiodical.core.commands.DeleteNewspaper;
+import net.gartee.openperiodical.core.commands.DeleteNewspaperCommand;
 import net.gartee.openperiodical.core.persistence.repositories.NewspaperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class DeleteNewspaperHandler extends CommandHandler<DeleteNewspaper>{
+public class DeleteNewspaperHandler extends CommandHandler<DeleteNewspaperCommand>{
     private final NewspaperRepository newspaperRepository;
 
     @Autowired
@@ -18,7 +18,7 @@ public class DeleteNewspaperHandler extends CommandHandler<DeleteNewspaper>{
     }
 
     @Override
-    public void handle(DeleteNewspaper command) {
+    public void handle(DeleteNewspaperCommand command) {
         newspaperRepository.delete(command.getNewspaperId());
     }
 }
