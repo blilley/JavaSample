@@ -9,24 +9,36 @@ import java.util.List;
 
 public class Page {
     private PageId id;
-    private double size;
+    protected double height;
+    protected double width;
     private List<Content> contents = new ArrayList<>();
 
-    public Page(PageId id, double size) {
+    public Page(PageId id, double height, double width) {
         this.id = id;
-        this.size = size;
+        this.height = height;
+        this.width = width;
     }
 
     public PageId getId() {
         return id;
     }
 
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
     public double getSize() {
-        return size;
+        return height * width;
     }
 
     public void addContent(Content content) {
-        Guard.thatContentIsWithinAvailableSize(this, content);
+        Guard.thatContentDoesNotExceedAvailableSpace(content, this);
+        Guard.thatContentDoesNotExceedHeightOfPage(content, this);
+        Guard.thatContentDoesNotExceedWidthOfPage(content, this);
 
         contents.add(content);
     }
@@ -48,10 +60,44 @@ public class Page {
         return getSize() - getUnavailableSize();
     }
 
+    public List<Content> getContents() {
+        return contents;
+    }
+
     private static class Guard {
-        private static void thatContentIsWithinAvailableSize(Page page, Content content) {
-            if(content.getSize() > page.getAvailableSize())
+        public static void thatContentDoesNotExceedAvailableSpace(Content content, Page page) {
+            if(content.getSize() > page.getAvailableSize()) {
                 throw new ContentExceedsAvailableSizeException(content.getId(), page.getId());
+            }
+        }
+
+        public static void thatContentDoesNotExceedHeightOfPage(Content content, Page page) {
+            if(content.getHeight() > page.getHeight()) {
+                throw new ContentExceedsAvailableSizeException(content.getId(), page.getId());
+            }
+        }
+
+        public static void thatContentDoesNotExceedWidthOfPage(Content content, Page page) {
+            if(content.getWidth() > page.getWidth()) {
+                throw new ContentExceedsAvailableSizeException(content.getId(), page.getId());
+            }
+        }
+
+        public static void thatContentDoesNotOverlapExistingContent(Content content, Page page) {
+            if(!content.isFixedSize()) {
+                return;
+            }
+
+            List<Content> fixedWidthContent = new ArrayList<>();
+            for(Content c : page.getContents()) {
+                if(c.isFixedSize()) {
+                    fixedWidthContent.add(c);
+                }
+            }
+
+            for(Content c : fixedWidthContent) {
+
+            }
         }
     }
 }

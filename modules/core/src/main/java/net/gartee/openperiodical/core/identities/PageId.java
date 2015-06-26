@@ -1,7 +1,7 @@
 package net.gartee.openperiodical.core.identities;
 
 public class PageId {
-    private static final String TO_STRING_TEMPLATE = "issue %1 - page %2";
+    private static final String TO_STRING_TEMPLATE = "issue %s - page %s";
 
     private IssueId issueId;
     private int pageNumber;
@@ -35,12 +35,6 @@ public class PageId {
 
     @Override
     public String toString() {
-
-        String string = String.format(
-                TO_STRING_TEMPLATE,
-                getIssueId(),
-                getPageNumber());
-
-        return string;
+        return String.format(TO_STRING_TEMPLATE, getIssueId(), getPageNumber());
     }
 }

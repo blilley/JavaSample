@@ -14,7 +14,6 @@ import static org.mockito.Mockito.*;
 
 public class DeleteNewspaperHandlerTest
 {
-
     private static final UUID NEWSPAPER_ID = UUID.fromString("4544bb77-b977-491f-8cbd-49ea85cc1731");
     private static final String NEWSPAPER_NAME = "Newspaper";
 
@@ -24,6 +23,7 @@ public class DeleteNewspaperHandlerTest
         newspaper.setName(NEWSPAPER_NAME);
 
         NewspaperRepository repository = mock(NewspaperRepository.class);
+        when(repository.exists(isA(PeriodicalId.class))).thenReturn(true);
         when(repository.get(isA(PeriodicalId.class))).thenReturn(newspaper);
         ArgumentCaptor<PeriodicalId> periodicalId = ArgumentCaptor.forClass(PeriodicalId.class);
 

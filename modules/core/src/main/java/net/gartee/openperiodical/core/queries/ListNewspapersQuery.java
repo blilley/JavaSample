@@ -20,6 +20,8 @@ public class ListNewspapersQuery extends Query<ListNewspapersCriteria, List<News
 
     @Override
     public List<Newspaper> execute(ListNewspapersCriteria criteria) {
+        // todo: capitalize stuff?
+
         return newspaperRepository.getAll();
     }
 }

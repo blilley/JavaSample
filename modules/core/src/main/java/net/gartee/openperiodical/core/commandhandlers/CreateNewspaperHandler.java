@@ -32,7 +32,7 @@ public class CreateNewspaperHandler extends CommandHandler<CreateNewspaper> {
     }
 
     private static class Guard {
-        private static final String EMPTY_NAME_MESSAGE_TEMPLATE = "Newspaper name cannot be empty (%1)";
+        private static final String EMPTY_NAME_MESSAGE_TEMPLATE = "Newspaper name cannot be empty (%s)";
 
         private static void thatNameIsNotEmpty(Newspaper newspaper) {
             if (newspaper.getName() == null || newspaper.getName().isEmpty()) {

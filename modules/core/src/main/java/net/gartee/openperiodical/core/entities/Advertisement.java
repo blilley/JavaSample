@@ -7,4 +7,9 @@ public class Advertisement extends Content {
     public Advertisement(ContentId id) {
         super(id);
     }
+
+    @Override
+    public boolean isFixedSize() {
+        return true;
+    }
 }

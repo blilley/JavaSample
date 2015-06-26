@@ -1,13 +1,15 @@
 package net.gartee.openperiodical.core.identities;
 
-public class ContentId {
-    private int id;
+import java.util.UUID;
 
-    public ContentId(int id) {
+public class ContentId {
+    private UUID id;
+
+    public ContentId(UUID id) {
         this.id = id;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
