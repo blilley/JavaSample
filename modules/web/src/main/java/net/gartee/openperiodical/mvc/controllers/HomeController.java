@@ -45,6 +45,12 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping(value = "Create", method = RequestMethod.GET)
+    public String createNewsPaper()
+    {
+        return "createNewspaper";
+    }
+
     @RequestMapping(value = "Create", method = RequestMethod.POST)
     public String createNewsPaper(@RequestParam String title)
     {
